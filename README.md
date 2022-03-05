@@ -70,8 +70,8 @@ With Postgres, we're dealing with multiple users who could be changing the datab
 
 We have the following two rows in the table named accounts:
 
-| id | Name | Balance |
-| ------ | ------ |
+| id     | Name   | Balance |
+| ------ | ------ | ------  |
 | 1 | Ram | 400 |
 | 2 | Cenrax | 8000 |
 | 3 | Rosy | 8779 |
