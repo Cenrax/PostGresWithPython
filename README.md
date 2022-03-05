@@ -72,6 +72,6 @@ We have the following two rows in the table named accounts:
 
 | id | Name | Balance |
 | ------ | ------ |
-| 1 | Ram | 400
-| 2 | Cenrax | 8000
-| 3 | Rosy | 8779
+| 1 | Ram | 400 |
+| 2 | Cenrax | 8000 |
+| 3 | Rosy | 8779 |
