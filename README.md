@@ -9,3 +9,18 @@ In order to communicate with our Postgres server, we will be using the open sour
 import psycopg2
 conn = psycopg2.connect("dbname=databaseName user=userName")
 ```
+The connection object allows the client to interact with the database server until it is closed. To issue commands to the database, you will also need to create a cursor object by calling the connection.cursor() method. This object is the one that we will use to execute our commands. However, whenever you close the connection, you won't be able to issue any additional commands with that connection's cursor.
+
+To execute commands on the Postgres database, you call the cursor.execute() method with a SQL query passed as a string. We often refer to this string as a query string. The cursor.execute() method doesn't return the query results right away. It will return None if the query was successful; otherwise, it will return an error otherwise. After executing a query, we can use the cursor object to iterate over all results using a for loop like this:
+
+** Note: For Rest of this blog I will consider the user name as Cenrax and the database name as postgress **
+
+```
+import psycopg2
+conn = psycopg2.connect("dbname=postgres user=Cenrax")
+cur = conn.cursor()
+cur.execute("SELECT * FROM users;")
+for row in cur:
+    print(row)
+```
+Alternatively, we can get the returned value — or values — by calling one of the two methods: cursor.fetchone() or cursor.fetchall(). The cursor.fetchone() method returns the first result or None if there are no results. On the other hand, the cursor.fetchall() method returns a list containing each row from the result or an empty list [] if there are no rows matching the query.
