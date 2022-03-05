@@ -60,3 +60,18 @@ conn = psycopg2.connect("dbname=dq user=dq")
 cur = conn.cursor()
 cur.execute("SELECT * FROM users;")
 ```
+<img width="438" alt="image" src="https://user-images.githubusercontent.com/43017632/156875172-9d73f7b7-5c93-48f4-8684-f618e319f27a.png">
+
+You will get an error like this.
+
+So let's see in details why this is happening:
+
+With Postgres, we're dealing with multiple users who could be changing the database at the same time with a remote connection to a server that could fail at any moment. In order to see why this can be a problem, imagine we're keeping track of accounts for different customers at a bank.
+
+We have the following two rows in the table named accounts:
+
+| id | Name | Balance |
+| ------ | ------ |
+| 1 | Ram | 400
+| 2 | Cenrax | 8000
+| 3 | Rosy | 8779
