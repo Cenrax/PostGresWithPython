@@ -13,11 +13,11 @@ The connection object allows the client to interact with the database server unt
 
 To execute commands on the Postgres database, you call the cursor.execute() method with a SQL query passed as a string. We often refer to this string as a query string. The **cursor.execute()** method doesn't return the query results right away. It will return None if the query was successful; otherwise, it will return an error otherwise. After executing a query, we can use the cursor object to iterate over all results using a for loop like this:
 
-** Note: For Rest of this blog I will consider the user name as Cenrax and the database name as postgress **
+***Note: For Rest of this blog I will consider the user name as Cenrax and the database name as dq***
 
 ```
 import psycopg2
-conn = psycopg2.connect("dbname=postgres user=Cenrax")
+conn = psycopg2.connect("dbname=dq user=Cenrax")
 cur = conn.cursor()
 cur.execute("SELECT * FROM users;")
 for row in cur:
@@ -48,3 +48,15 @@ cur.execute(
 
 ```
 Now we have created our user table. The commands are almost similar to SQL but sometimes the command may differ so I would encourage please go through the documentation if you are facing an error. I have specified the column names along with their datatypes.
+
+Let now see an important difference in Postgres as compared to SQlLite:
+If you were to inspect the dq database now, you would notice that there actually isn't a table named users in it. This isn't a bug (First time users may assume it) — it's because of a concept called ***SQL transactions***. In short, Postgres uses transactions to ensure data consistency. This groups the queries together and only saves changes when explicitly requested to do so. This contrasts with SQLite, where every query we made that modified the data immediately changed the database. We will study this in more detail on the following screens.
+
+Let's verify what I have written in the previous paragraph.
+
+```
+import psycopg2
+conn = psycopg2.connect("dbname=dq user=dq")
+cur = conn.cursor()
+cur.execute("SELECT * FROM users;")
+```
