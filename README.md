@@ -24,3 +24,10 @@ for row in cur:
     print(row)
 ```
 Alternatively, we can get the returned value — or values — by calling one of the two methods: **cursor.fetchone()** or **cursor.fetchall()**. The cursor.fetchone() method returns the first result or None if there are no results. On the other hand, the cursor.fetchall() method returns a list containing each row from the result or an empty list [] if there are no rows matching the query.
+
+```
+cur.execute("SELECT * FROM users;")
+one_result = cur.fetchone()
+all_results = cur.fetchall()
+```
+Till now we have assumed the table user is created already. Now **we will see how do we create a table in Postgres**
