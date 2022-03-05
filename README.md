@@ -31,3 +31,20 @@ one_result = cur.fetchone()
 all_results = cur.fetchall()
 ```
 Till now we have assumed the table user is created already. Now **we will see how do we create a table in Postgres**
+
+```
+import psycopg2
+conn = psycopg2.connect("dbname=dq user=Cenrax")
+cur = conn.cursor()
+cur.execute(
+"""
+    CREATE TABLE users (
+        id integer PRIMARY KEY, 
+        email text, 
+        name text, 
+        address text
+    );
+""")
+
+```
+Now we have created our user table. The commands are almost similar to SQL but sometimes the command may differ so I would encourage please go through the documentation if you are facing an error. I have specified the column names along with their datatypes.
