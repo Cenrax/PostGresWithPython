@@ -73,5 +73,50 @@ We have the following two rows in the table named accounts:
 | id     | Name   | Balance |
 | ------ | ------ | ------  |
 | 1 | Ram | 400 |
-| 2 | Cenrax | 8000 |
-| 3 | Rosy | 8779 |
+| 2 | Cenrax | 500 |
+| 3 | Rosy | 1000 |
+
+Let's say Rosy gives 100 Rs to Ram. We could model this with two queries:
+
+- UPDATE accounts SET balance=500 WHERE name="RAM";
+
+- UPDATE accounts SET balance=900 WHERE name="Rosy";
+
+In the example above, we remove 100 Rs from Rosy, and add 100 Rs to Ram. Imagine that the connection fails after the first UPDATE but before the second one.
+
+The first query would run properly, but the second would not. The result is that Ram would be credited 100 rs, but 100 rs would not be removed from Rosy. This would cause the bank to lose money. The table would end in the following state:
+
+| id     | Name   | Balance |
+| ------ | ------ | ------  |
+| 1 | Ram | 500 |
+| 2 | Cenrax | 500 |
+| 3 | Rosy | 1000 |
+
+To avoid this problem, Postgres uses transactions. Transactions prevent this type of behavior by ensuring that all the queries in a transaction block are executed together. If any query in a transaction fails, the whole transaction group fails, and no changes are made to the database at all.
+
+After having issued some queries, to tell Postgres that we want to execute them as a transaction group, we commit the changes by executing the **connection.commit()** method.
+Notice how the values in the table do not change until the transaction is committed. Whenever we open a connection in psycopg2, we automatically create a new transaction. All queries are grouped together until those are committed. When a commit is executed, the Postgres engine will run all the queries at once.
+
+You can think of committing as saving a document in a text editor. Say you open a text document and add a few lines of text. The document won't really be modified until you save the changes. This is what committing the changes in a database does.
+
+If we don't want to apply the changes in the transaction block, we can call the **connection.rollback()** method to remove the transaction. Not calling either of these methods will cause the transaction to stay in a pending state, and this will result in the changes not being applied to the database.
+
+Now you can close all connections and see the correct way of creating the table (in our example the user table)
+
+```
+import psycopg2
+conn = psycopg2.connect("dbname=dq user=dq")
+query_string = """
+    CREATE TABLE users(
+        id integer PRIMARY KEY, 
+        email text,
+        name text,
+        address text
+    );
+"""
+cur = conn.cursor()
+cur.execute(query_string)
+conn.commit()
+conn.close()
+```
+
