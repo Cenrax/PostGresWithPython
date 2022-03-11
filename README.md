@@ -120,3 +120,4 @@ conn.commit()
 conn.close()
 ```
 
+We mentioned in the previous part that changes to the database are only effective if you commit them. However, until you close the connection, your future queries using that same connection will already take these changes into account as if they had been committed. They will remain invisible for other users until you commit. If you close the connection before committing them, then they will simply disappear. This means that during that time, not everyone will have the same view over the database.
