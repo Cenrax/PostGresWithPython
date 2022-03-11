@@ -150,8 +150,8 @@ Now let's have a checkpoint where we will be loading all files from CSV to a pos
 
 Till now what we have learnt please revise them using the following points:
 
-    - The difference between SQLite and Postgres and how the server-client model works
-    - How to connect to a Postgres database
-    - How to create a table and load a CSV file into it
-    - Why transactions are important
+- The difference between SQLite and Postgres and how the server-client model works
+- How to connect to a Postgres database
+- How to create a table and load a CSV file into it
+- Why transactions are important
 
