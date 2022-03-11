@@ -132,6 +132,16 @@ Now let's see everything in a diagrammetic way:
 A common way of loading data into a Postgres table is to issue an INSERT command on that table. The insert command requires a table name and the sequence of values to insert. Here's an example of an insert query on the users table:
 
 ```
-INSERT INTO users VALUES (1, 'hello@dataquest.io', 'John', '123, Fake Street');
+INSERT INTO users VALUES (1, 'hello@subam.io', 'John', '123, Fake Street');
+```
+
+The recommended way is to use the cursor.execute() method without string formatting. If you look at this method's documentation, you will see that you can pass values that will be correctly converted and replaced into the query string.
+
+```
+import psycopg2
+conn = psycopg2.connect("dbname=dq user=dq")
+cur = conn.cursor()
+cur.execute("INSERT INTO users VALUES (%s, %s, %s, %s);", (1, "hello@dataquest.io", "John", "123, Fake Street"))
+conn.commit()
 ```
 
