@@ -146,4 +146,12 @@ conn.commit()
 ```
 The behavior of %s is similar to that of {} in Python string formatting; they both act as placeholders for actual values
 
-Now let's have a checkpoint where we will be loading all files from CSV to a postgress database
+Now let's have a checkpoint where we will be loading all files from CSV to a postgress database (Checkpoint2.py)
+
+Till now what we have learnt please revise them using the following points:
+
+    - The difference between SQLite and Postgres and how the server-client model works
+    - How to connect to a Postgres database
+    - How to create a table and load a CSV file into it
+    - Why transactions are important
+
