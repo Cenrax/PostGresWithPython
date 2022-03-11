@@ -127,3 +127,11 @@ Go the checkpoint1.py to test your skills.
 Now let's see everything in a diagrammetic way:
 ![image](https://user-images.githubusercontent.com/43017632/157986910-4494f59f-0765-4f3b-8a4f-5f03609f4049.png)
 
+## INSERT DATA INTO THE TABLE
+
+A common way of loading data into a Postgres table is to issue an INSERT command on that table. The insert command requires a table name and the sequence of values to insert. Here's an example of an insert query on the users table:
+
+```
+INSERT INTO users VALUES (1, 'hello@dataquest.io', 'John', '123, Fake Street');
+```
+
