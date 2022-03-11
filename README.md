@@ -144,4 +144,6 @@ cur = conn.cursor()
 cur.execute("INSERT INTO users VALUES (%s, %s, %s, %s);", (1, "hello@dataquest.io", "John", "123, Fake Street"))
 conn.commit()
 ```
+The behavior of %s is similar to that of {} in Python string formatting; they both act as placeholders for actual values
 
+Now let's have a checkpoint where we will be loading all files from CSV to a postgress database
